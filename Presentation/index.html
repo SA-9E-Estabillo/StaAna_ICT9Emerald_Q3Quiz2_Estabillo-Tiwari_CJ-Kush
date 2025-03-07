@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKExpress - Train Fare Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #000428, #004e92);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            width: 120px;
+            height: auto;
+        }
+        select, button {
+            width: 100%;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        button {
+            background: #ff7eb3;
+            color: white;
+            border: none;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff4d8d;
+        }
+        .img-container img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 3px solid white;
+        }
+        .card-custom {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #DisplayAns {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff7eb3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container text-center">
+        <div class="logo-container">
+            <img src="CK EXPRESS.jpg" alt="CKExpress Logo">
+            <h2 class="mt-2">CKExpress - Train Fare (LRT - 1)</h2>
+        </div>
+
+        <div class="img-container">
+            <img src="LRTMAP.png" alt="LRT & MRT Map">
+        </div>
+
+        <div class="card-custom">
+            <label for="leavingFrom" class="form-label">Leaving From:</label>
+            <select id="leavingFrom" class="form-select">
+                <option value="0">Choose a station...</option>
+                <option value="0">Baclaran</option>
+                <option value="3">EDSA</option>
+                <option value="6">Gil Puyat</option>
+                <option value="9">Carriedo</option>
+                <option value="12">Monumento</option>
+                <option value="15">Roosevelt</option>
+                <option value="18">North Avenue</option>
+            </select>
+
+            <label for="goingTo" class="form-label">Going To:</label>
+            <select id="goingTo" class="form-select">
+                <option value="0">Choose a station...</option>
+                <option value="0">Baclaran</option>
+                <option value="3">EDSA</option>
+                <option value="6">Gil Puyat</option>
+                <option value="9">Carriedo</option>
+                <option value="12">Monumento</option>
+                <option value="15">Roosevelt</option>
+                <option value="18">North Avenue</option>
+            </select>
+
+            <div class="d-grid gap-2 mt-3">
+                <button onclick="calculateFare()">Regular Fare</button>
+                <button onclick="discountFare()">Discounted Fare</button>
+            </div>
+
+            <p class="mt-3">Fare: <span id="DisplayAns">---</span> PHP</p>
+        </div>
+
+        <hr>
+        <div class="d-grid gap-2">
+            <a href="lrt_schedule.html" class="btn btn-info">View LRT Schedule</a>
+            <a href="feedback.html" class="btn btn-warning">Give Feedback</a>
+        </div>
+    </div>
+
+    <script>
+        function calculateFare() {
+            let leavingFrom = parseInt(document.getElementById("leavingFrom").value);
+            let goingTo = parseInt(document.getElementById("goingTo").value);
+            let baseFare = 13;
+            let distance = Math.abs(goingTo - leavingFrom);
+            let fare = baseFare + distance;
+            document.getElementById("DisplayAns").innerText = fare + ".00 PHP";
+        }
+
+        function discountFare() {
+            let leavingFrom = parseInt(document.getElementById("leavingFrom").value);
+            let goingTo = parseInt(document.getElementById("goingTo").value);
+            let baseFare = 13;
+            let distance = Math.abs(goingTo - leavingFrom);
+            let discountedFare = (baseFare + distance) * 0.80;
+            document.getElementById("DisplayAns").innerText = discountedFare.toFixed(2) + " PHP";
+        }
+    </script>
+
+</body>
+</html>
